@@ -5,20 +5,7 @@ const withAuth = require('../utils/auth')
 router.get('/', async (req, res) => {
   try {
     const blogData = await Blog.findAll({
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'content', 'date_created', 'user_id', 'blog_id'],
-          include: {
-            model: User,
-            attributes: ['name'],
-          }
-        },
-        {
-          model: User,
-          attributes: ['name'],
-        }
-      ],
+      include: [User]
     });
 
     const blogs = blogData.map((blog) =>
@@ -35,22 +22,43 @@ router.get('/', async (req, res) => {
   }
 });
 
-// remember to make this async with withAuth
+
+// blog by id
+router.get('/blog/:id', async (req, res) => {
+  try{
+    const blogData = await Blog.findByPk(req.params.id, {
+      include: [
+        User,
+        {
+          model: Comment,
+          include: [User],
+        },
+      ],
+    });
+    if (blogData) {
+      const blog = blogData.get({plain: true});
+      res.render('blog', { blog, loggedIn: req.session.loggedIn });
+    } else {
+      res.status(404).json({ message: 'Blog not found'})
+    }
+  } catch(err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/newblog', (req, res) => {
+  res.render('newblog', {
+    loggedIn: req.session.loggedIn,
+  })
+})
+
 router.get('/dashboard', (req, res) => {
-  // I will need to pass the user's blog posts and comments and user to the views
   res.render('dashboard', {
     loggedIn: req.session.loggedIn,
-  });
-});
+  })
+})
 
-// remember to make this async with withAuth
-router.get('/blog/:id', (req, res) => {
-  // need to pass blog id and the comments that go along with it.
-  res.render('blog', {
-    loggedIn: req.session.loggedIn,
-  });
-});
-
+// login route
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
