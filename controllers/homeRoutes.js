@@ -35,54 +35,24 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET one blog post
-// TODO: Replace the logic below with the custom middleware
-router.get('/blog/:id', withAuth, async (req, res) => {
-  // If the user is not logged in, redirect the user to the login page
+// remember to make this async with withAuth
+router.get('/dashboard', (req, res) => {
+  // I will need to pass the user's blog posts and comments and user to the views
+  res.render('dashboard', {
+    loggedIn: req.session.loggedIn,
+  });
+});
 
-  // If the user is logged in, allow them to view the blog post
-  try {
-    const dbBlogPostData = await Blog.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name']
-        },
-      ],
-    });
-    const blogPost = dbBlogPostData.get({ plain: true });
-    res.render('blogpost', { 
-      ...blogPost, 
-      loggedIn: req.session.loggedIn });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-}
-);
-
-// // Prevent non logged in users from viewing the homepage
-// router.get('/', withAuth, async (req, res) => {
-//   try {
-//     const userData = await User.findAll({
-//       attributes: { exclude: ['password'] },
-//       order: [['name', 'ASC']],
-//     });
-
-//     const users = userData.map((project) => project.get({ plain: true }));
-
-//     res.render('homepage', {
-//       users,
-//       // Pass the logged in flag to the template
-//       logged_in: req.session.logged_in,
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+// remember to make this async with withAuth
+router.get('/blog/:id', (req, res) => {
+  // need to pass blog id and the comments that go along with it.
+  res.render('blog', {
+    loggedIn: req.session.loggedIn,
+  });
+});
 
 router.get('/login', (req, res) => {
-  if (req.session.logged_in) {
+  if (req.session.loggedIn) {
     res.redirect('/');
     return;
   } else {
@@ -90,15 +60,5 @@ router.get('/login', (req, res) => {
     res.render('login');
   }
 });
-
-// get dashboard route
-
-// get new blog post route
-
-// get edit blog post route
-
-// get new comment route
-
-// get edit comment route
 
 module.exports = router;
