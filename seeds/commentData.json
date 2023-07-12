@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "content": "this is a test of comments",
+    "user_id": 1,
+    "blog_id": 1,
+    "comment_id": 1
+  }
+]

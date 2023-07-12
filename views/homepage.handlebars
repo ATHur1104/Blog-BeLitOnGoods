@@ -1,10 +1,13 @@
-{{#each users as |user| }}
-<div class="row align-center mb-5">
-  <div class="col-md-6">
-    <h2>test</h2>
+{{#each blogs as |blog| }}
+<div class="row mb-4 blog">
+  <div class="col-md-5">
+    <h2>
+      <a href="/blog/{{blog.id}}">{{blog.title}}</a>
+    </h2>
   </div>
-  <div class="col-md-6">
-    <h3>test2</h3>
+  <div class="col-md-7">
+    <h3>{{blog.content}}</h3>
+    <p>By: {{blog.user.name}} On: {{format_date blog.date_created}}</p>
   </div>
 </div>
 {{/each}}

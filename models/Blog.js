@@ -24,6 +24,13 @@ Blog.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    blog_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'blog',
+        key: 'id',
+      },
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
