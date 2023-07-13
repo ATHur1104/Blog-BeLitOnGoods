@@ -1,0 +1,27 @@
+body {
+    background-color: slategray;
+}
+
+.display-flex {
+    display: flex !important;
+    flex-direction: row-reverse;
+    align-content: center;
+}
+
+
+header {
+    background-color: aquamarine;
+}
+
+.blog {
+    background-color: blanchedalmond;
+}
+
+.dashboard {
+    justify-content: center;
+}
+
+ul {
+    list-style: none;
+    font-size: large;
+}

@@ -1,4 +1,17 @@
-<div>This is the dashboard test connection</div>
-{{!-- one side has blog posts users wrote by title as the href to the id. include a edit button--}}
+<div class="row mb-4 dashboard">
 
+{{!-- one side has blog posts users wrote by title as the href to the id. include a edit button--}}
+<button id="myBlogPosts">My Blog Posts</button>
+{{#if myPostsFlag}}
+<div class="dashboard-content" style="display: none;">
+{{> dashboard-content blogs=blogs}}
+</div>
+{{/if}} 
 {{!-- the other side has comments user wrote the title of the blog post and the comment content. include a edit button  --}}
+<button id="myComments">My Comments</button>
+{{#if myCommentsFlag}}
+{{> dashboard-content comments=comments}}
+{{/if}} 
+</div>
+
+<script src='/js/dashboard.js'></script>

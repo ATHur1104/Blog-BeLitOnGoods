@@ -8,6 +8,10 @@
   <div class="col-md-7">
     <h3>{{blog.content}}</h3>
     <p>By: {{blog.user.name}} On: {{format_date blog.date_created}}</p>
+    {{log "Blog User ID:" blog.user.id}}
+    {{#if (eq blog.user.id ../userId)}}
+  <button class="edit">Edit</button>
+  {{/if}}
   </div>
 </div>
 {{/each}}

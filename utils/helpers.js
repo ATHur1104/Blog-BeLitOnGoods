@@ -3,4 +3,7 @@ module.exports = {
       // Format date as MM/DD/YYYY
       return date.toLocaleDateString();
   },
+  eq: function (a, b) {
+    return a == b;
+  },
 };

@@ -11,17 +11,21 @@ router.get('/', async (req, res) => {
     const blogs = blogData.map((blog) =>
       blog.get({ plain: true })
     );
+    
+    const userId = req.session.user_id
+
+    console.log("Session User ID:", userId);
 
     res.render('homepage', {
       blogs,
       loggedIn: req.session.loggedIn,
+      userId,
     });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
-
 
 // blog by id
 router.get('/blog/:id', async (req, res) => {
