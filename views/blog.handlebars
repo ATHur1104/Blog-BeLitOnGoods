@@ -1,14 +1,4 @@
-{{!-- {{#each blogs as |blog| }}
-<div class="row mb-4 blog">
-  <div class="col-md-5">
-    <h2>
-      <a href="/blog/{{blog.id}}">{{blog.title}}</a>
-    </h2>
-  </div>
-  <div class="col-md-7">
-    <h3>{{blog.content}}</h3>
-    <p>By: {{blog.user.name}} On: {{format_date blog.date_created}}</p>
-  </div>
-</div>
-{{/each}} --}}
-<p>this is the blog connection test for ID</p>
+<h2>Title: {{blog.title}}</h2>
+<h3>Blogpost: {{blog.content}}</h3>
+<h3>By: {{blog.user.name}}</h3>
+<h3>On: {{format_date blog.date_created}}</h3>

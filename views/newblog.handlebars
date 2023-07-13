@@ -1,14 +1,25 @@
-{{!-- {{#each blogs as |blog| }}
-<div class="row mb-4 blog">
-  <div class="col-md-5">
+<div class='add-blog-container'>
     <h2>
-      <a href="/blog/{{blog.id}}">{{blog.title}}</a>
+      Let's make a new post!
     </h2>
+    <form class='blog-form'>
+      <label for='title'>
+        Blog Post Title:
+      </label>
+      <br />
+      <textarea id='title' name='title' rows='2' cols='30'>{{blog.title}}</textarea>
+      <br />
+      <label for='content'>
+        Blog Content:
+      </label>
+      <br />
+      <textarea id='content' name='content' rows='5' cols='30'>{{blog.content}}</textarea>
+      <br />
+      <button type='submit' value='Submit'>
+        Submit
+      </button>
+    </form>
   </div>
-  <div class="col-md-7">
-    <h3>{{blog.content}}</h3>
-    <p>By: {{blog.user.name}} On: {{format_date blog.date_created}}</p>
-  </div>
-</div>
-{{/each}} --}}
-<p>this is the new blog post test connection</p>
+
+<script src='/js/blogpost.js'></script>
+
